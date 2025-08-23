@@ -281,8 +281,33 @@ const product_variants = [
   },
 ];
 
+const developers = [
+  {
+    id: 2,
+    company_name: 'Citra Maja City',
+    phone: '021999999',
+    email: 'citra@gmail.com',
+    address_title: null,
+    address: '<p>-</p>',
+    logo: 'https://gallery.dpn-pppi.org/90-home/vendor_logo/01JWTNH2A1PM7VCV7KS8YJFDZ9.png',
+    company: 'Citra Maja City',
+  },
+  {
+    id: 1,
+    company_name: 'PERMATA MUTIARA MAJA (PMM)',
+    phone: '081213805336',
+    email: 'a.zaenuriramdani@gmail.com',
+    address_title: null,
+    address:
+      '<p>Jl. Raya Maja, Maja,</p><p>Kec. Maja, Kabupaten Lebak, Banten</p>',
+    logo: 'https://gallery.dpn-pppi.org/90-home/vendor_logo/01JVS00P41N6PMPHGJ4T6KCDMY.png',
+    company: 'PT. Bukitnusaindahperkasa',
+  },
+];
 const tableName = 'products';
 export async function up(knex: Knex): Promise<void> {
+  await knex('developers').insert(developers);
+
   for (const product of products) {
     const [result] = await knex(tableName)
       .insert({
