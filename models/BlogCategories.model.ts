@@ -1,0 +1,10 @@
+import { Table } from 'middleware/decorators/objections';
+import { Model } from '.';
+
+@Table('blog_categories')
+export class BlogCategoriesModel extends Model {
+  name: string;
+  icon?: string;
+  description?: string;
+  is_active: boolean;
+}
