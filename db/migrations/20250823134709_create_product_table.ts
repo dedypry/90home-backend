@@ -290,7 +290,7 @@ const developers = [
     address_title: null,
     address: '<p>-</p>',
     logo: 'https://gallery.dpn-pppi.org/90-home/vendor_logo/01JWTNH2A1PM7VCV7KS8YJFDZ9.png',
-    company: 'Citra Maja City',
+    company_brand: 'Citra Maja City',
   },
   {
     id: 1,
@@ -301,7 +301,7 @@ const developers = [
     address:
       '<p>Jl. Raya Maja, Maja,</p><p>Kec. Maja, Kabupaten Lebak, Banten</p>',
     logo: 'https://gallery.dpn-pppi.org/90-home/vendor_logo/01JVS00P41N6PMPHGJ4T6KCDMY.png',
-    company: 'PT. Bukitnusaindahperkasa',
+    company_brand: 'PT. Bukitnusaindahperkasa',
   },
 ];
 const tableName = 'products';
