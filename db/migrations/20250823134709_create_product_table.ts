@@ -309,43 +309,41 @@ export async function up(knex: Knex): Promise<void> {
   await knex('developers').insert(developers);
 
   for (const product of products) {
-    const [result] = await knex(tableName)
-      .insert({
-        images: JSON.parse(product.images).map(
-          (img) => `https://gallery.dpn-pppi.org/90-home/${img}`,
-        ),
-        cluster: product.cluster,
-        price: product.price,
-        description: product.description,
-        commission_fee: product.commission_fee,
-        developer_id: product.developer_id,
-        type_ads: product.type_ads,
-        certificate: product.certificate,
-        furniture: product.furniture,
-        listing_title: product.listing_title,
-        type_property: product.type_property,
-      })
-      .returning('id');
+    await knex(tableName).insert({
+      id: product.id,
+      images: JSON.parse(product.images).map(
+        (img) => `https://gallery.dpn-pppi.org/90-home/${img}`,
+      ),
+      cluster: product.cluster,
+      price: product.price,
+      description: product.description,
+      commission_fee: product.commission_fee,
+      developer_id: product.developer_id,
+      type_ads: product.type_ads,
+      certificate: product.certificate,
+      furniture: product.furniture,
+      listing_title: product.listing_title,
+      type_property: product.type_property,
+    });
     if (product.price && product.type && product.commission_fee) {
       await knex('product_variants').insert({
         price: product.price,
         type: product.type,
         commission_fee: product.commission_fee,
-        product_id: result.id,
+        product_id: product.id,
       });
     }
-
-    console.log(result);
 
     const variant = product_variants.filter((e) => e.product_id === product.id);
 
     if (variant.length > 0) {
       await knex('product_variants').insert(
         variant.map((item) => ({
+          id: item.id,
           price: item.price,
-          type: item.type,
+          type: `${item.type} ${item.blok ? ' - ' + item.blok : ''}`,
           commission_fee: item.commission_fee,
-          product_id: result.id,
+          product_id: product.id,
         })),
       );
     }
